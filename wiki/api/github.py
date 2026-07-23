@@ -610,6 +610,6 @@ def webhook() -> dict[str, Any]:
 	log.insert(ignore_permissions=True)
 	# Persist the delivery before dispatch, so the audit row survives even if a
 	# side effect later fails (the request would otherwise roll the insert back).
-	frappe.db.commit()  # nosemgrep: frappe-semgrep-rules.rules.frappe-manual-commit
+	frappe.db.commit()  # nosemgrep: frappe-manual-commit
 	log.handle_events()
 	return {"delivery": log.name, "event": log.event, "synced_spaces": log.synced_spaces}

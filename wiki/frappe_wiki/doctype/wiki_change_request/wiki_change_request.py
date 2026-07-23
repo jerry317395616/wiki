@@ -1565,7 +1565,7 @@ def retry_merge_after_resolution(name: str) -> str:
 			conflict_doc.insert(ignore_permissions=True)
 
 		if not frappe.flags.in_test:
-			frappe.db.commit()  # nosemgrep: frappe-semgrep-rules.rules.frappe-manual-commit
+			frappe.db.commit()  # nosemgrep: frappe-manual-commit
 
 		frappe.throw(
 			_("{0} new conflict(s) detected during merge retry.").format(len(new_conflicts)),
@@ -1678,7 +1678,7 @@ def _three_way_merge(cr: Document, space: Document) -> str:
 			conflict_doc.insert(ignore_permissions=True)
 
 		if not frappe.flags.in_test:
-			frappe.db.commit()  # nosemgrep: frappe-semgrep-rules.rules.frappe-manual-commit
+			frappe.db.commit()  # nosemgrep: frappe-manual-commit
 
 		frappe.throw(_("Merge conflicts detected"), frappe.ValidationError)
 

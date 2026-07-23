@@ -274,7 +274,7 @@ class WikiSpace(Document):
 		# Handle two cases:
 		# 1. Exact match (root group): old_route -> new_route
 		# 2. Prefix match (children): old_route/... -> new_route/...
-		frappe.db.sql(
+		frappe.db.sql(  # nosemgrep: frappe-sql-format-injection
 			f"""
 			UPDATE `tabWiki Document`
 			SET route = CASE

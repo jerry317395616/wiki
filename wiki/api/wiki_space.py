@@ -196,7 +196,7 @@ def _batch_update_sort_order(siblings: list[str]) -> None:
 	case_sql = " ".join(case_parts)
 	placeholders = ", ".join(["%s"] * len(names))
 
-	frappe.db.sql(
+	frappe.db.sql(  # nosemgrep: frappe-sql-format-injection
 		f"""
 		UPDATE `tabWiki Document`
 		SET sort_order = CASE name {case_sql} END

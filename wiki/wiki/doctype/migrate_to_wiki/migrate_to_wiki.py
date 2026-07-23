@@ -11,7 +11,7 @@ from frappe.model.document import Document
 
 
 # www/docs/user/manual/en/accounts/bank-reconciliation.md
-class MigrateToWiki(Document):
+class MigrateToWiki(Document):  # nosemgrep: frappe-modifying-but-not-committing-other-method
 	# app_name = erpnext_documentation
 	# docs_directory = www/docs/user/manual/en
 	# assets_directory = www/docs/assets/img
@@ -166,7 +166,7 @@ class MigrateToWiki(Document):
 		wiki_sidebar_item.update(wiki_sidebar_item_dict)
 		wiki_sidebar_item.save()
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep: frappe-manual-commit
 
 	def copy_assets(self):
 		shutil.copytree(

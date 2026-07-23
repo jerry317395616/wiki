@@ -999,8 +999,7 @@ def _publish_sync_status(space_name: str, status: str, after_commit: bool = True
 	# Intentionally site-wide (no room): any user viewing the space — and
 	# webhook-triggered syncs that carry no client/user context — must receive it.
 	# The payload is non-sensitive (just the space name + status).
-	# nosemgrep: frappe-semgrep-rules.rules.frappe-realtime-pick-room
-	frappe.publish_realtime(
+	frappe.publish_realtime(  # nosemgrep: frappe-realtime-pick-room
 		"wiki_git_sync_update",
 		{"space": space_name, "status": status},
 		after_commit=after_commit,

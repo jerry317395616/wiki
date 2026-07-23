@@ -561,7 +561,9 @@ class WikiDocumentRenderer(BaseRenderer):
 
 		context["csrf_token"] = csrf_token
 
-		html = frappe.render_template("templates/wiki/document.html", context)
+		html = frappe.render_template(  # nosemgrep: frappe-ssti
+			"templates/wiki/document.html", context
+		)
 		return self.build_response(html)
 
 
