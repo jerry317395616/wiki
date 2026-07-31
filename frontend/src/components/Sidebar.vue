@@ -14,7 +14,9 @@ import { useUserStore } from '@/stores/user';
 import { useStorage } from '@vueuse/core';
 import { computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import LucideBookOpen from '~icons/lucide/book-open';
 import LucideGitBranch from '~icons/lucide/git-branch';
+import LucideLayoutGrid from '~icons/lucide/layout-grid';
 import LucideLogOut from '~icons/lucide/log-out';
 import LucideRocket from '~icons/lucide/rocket';
 import LucideSettings from '~icons/lucide/settings';
@@ -36,6 +38,16 @@ const header = computed(() => ({
 	subtitle: userStore.data?.full_name,
 	logo: '/assets/wiki/images/wiki-logo.png',
 	menuItems: [
+		{
+			label: __('返回知识库'),
+			icon: LucideBookOpen,
+			onClick: () => window.location.assign('/desk/wiki'),
+		},
+		{
+			label: __('返回应用桌面'),
+			icon: LucideLayoutGrid,
+			onClick: () => window.location.assign('/desk'),
+		},
 		...(userStore.isWikiManager
 			? [
 					{
