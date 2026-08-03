@@ -38,6 +38,25 @@ const globalComponents = {
 
 const app = createApp(App);
 
+function loadFlowPanel() {
+	const assets = window.flow_panel_assets;
+	if (!assets?.js || document.querySelector('script[data-wiki-flow-panel]')) {
+		return;
+	}
+	if (assets.css && !document.querySelector('link[data-wiki-flow-panel]')) {
+		const stylesheet = document.createElement('link');
+		stylesheet.rel = 'stylesheet';
+		stylesheet.href = assets.css;
+		stylesheet.dataset.wikiFlowPanel = 'true';
+		document.head.appendChild(stylesheet);
+	}
+	const script = document.createElement('script');
+	script.type = 'module';
+	script.src = assets.js;
+	script.dataset.wikiFlowPanel = 'true';
+	document.body.appendChild(script);
+}
+
 setConfig('resourceFetcher', frappeRequest);
 
 app.use(pinia);
@@ -54,3 +73,4 @@ for (const key in globalComponents) {
 }
 
 app.mount('#app');
+loadFlowPanel();

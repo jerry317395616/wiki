@@ -28,7 +28,7 @@ def get_context_for_dev():
 
 
 def get_boot():
-	return frappe._dict(
+	boot = frappe._dict(
 		{
 			"frappe_version": frappe.__version__,
 			"site_name": frappe.local.site,
@@ -36,3 +36,14 @@ def get_boot():
 			"system_timezone": get_system_timezone(),
 		}
 	)
+	if "flow" in frappe.get_installed_apps():
+		try:
+			from flow.hooks import flow_panel_asset
+		except ImportError:
+			return boot
+
+		boot.flow_panel_assets = {
+			"js": flow_panel_asset("flow_panel.js"),
+			"css": flow_panel_asset("flow_panel.css"),
+		}
+	return boot
